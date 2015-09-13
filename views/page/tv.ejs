@@ -1,0 +1,52 @@
+<!-- views/pages/about.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+    <link href="/css/tv.css" rel="stylesheet">
+  </head>
+  <body class="container">
+    <header>
+      <% include ../partials/header %>
+    </header>
+
+    <main>
+      <div class="container">
+	<h1>TV controller</h1>
+	<br>
+        <div class="row">
+          <div class="col-xs-6">
+	    <button type="button" class="btn btn-danger"
+		    id="power">Power</button>
+	    <button type="button" class="btn btn-warning"
+		    id="mode">Mode</button>
+	  </div>
+          <div class="col-xs-3">
+	    <button type="button" class="btn btn-success
+					 updown">▲</button>
+	    <div class="updown-label">
+	      channel
+	    </div>
+	    <button type="button" class="btn btn-success
+					 updown">▼</button>
+          </div>
+
+	  <div class="clearfix"></div>
+	  <% items=[1,2,3,4,5,6,7,8,9,10, 11, 12] %>
+
+          <% items.forEach(function(item){ %>
+          <div class="col-xs-4">
+	    <button type="button" class="btn btn-primary
+					 channel"><%= item %></button>
+	  </div>
+	  <% }) %>
+	</div>
+      </div>
+    </main>
+    <footer>
+      <% include ../partials/footer %>
+      <script src="js/tv.js"></script>
+    </footer>
+  </body>
+</html>
