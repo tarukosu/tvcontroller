@@ -23,23 +23,40 @@ server.get('/', function(req, res){
     var companies=["NHK総合", "NHKEテレ","TVK","日テレ", "テレ朝", "TBS", "テレビ東京","フジテレビ","　","　","　","放送大学"];
     var items = [];
     for(var i=1; i<=12; i++){
+	if(9 <= i && i<= 11){
+	    continue;
+	}
 	var value;
 	if(i<10){
 	    value="KEY_" + i;
 	}else{
 	    value="KEY_F" + i;
 	}
+	
 	items[items.length]={num: i + "<br/>" + companies[i-1], value: value};
     }
 	
     res.render('tv.ejs', {items: items});
 });
 
-server.get('/tvapi', function(req, res){
-    console.log(req.query.button)
-    exec('irsend SEND_ONCE panasonic_tv.conf ' + req.query.button, function(err, stdout, stderr){
+function sendButton(button){
+    exec('irsend SEND_ONCE panasonic_tv.conf ' + button, function(err, stdout, stderr){
 	console.log("executed");
     });
+}
+
+server.get('/tvapi', function(req, res){
+    key = req.query.button
+    console.log(key)
+    if(key == "TV_MODE"){
+	sendButton("KEY_MODE")
+	sendButton("KEY_1")
+    }else if(key =="HDMI_MODE"){
+	sendButton("KEY_MODE")
+	sendButton("KEY_4")
+    }else{
+	sendButton(key)
+    }
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify({ status: 200 }));
     res.end();
