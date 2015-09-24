@@ -1,14 +1,22 @@
 $(function(){
     var url="tvapi";
-    $("#power").click(function(){
+    function sendKey(key){
 	$.ajax({
 	    url: url,
+	    cache:false,
 	    data: {
-		button: "KEY_POWER"
+		button: key
 	    }
 	});
-	    
-	alert("hoge");
+    }
+    $("#power").click(function(){
+	//sendKey("KEY_POWER");
     });
+
+    $("button").click(function(){
+	//alert(this.value);
+	sendKey(this.value);
+    });
+    
 
 });
