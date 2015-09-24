@@ -14,8 +14,7 @@ server.set('view options', { layout: false });
 server.set('views', __dirname + '/views/page');
 server.use(express.static(__dirname + '/public'));
 server.use('/bower_components',  express.static(__dirname + '/bower_components'));
-//server.use(express.favicon(path.join(__dirname, 'public/images/tv.jpg')));
-server.use(favicon(__dirname + '/public/img/tv.jpg'));
+server.use(favicon(__dirname + '/public/img/favicon.png'));
 
 // ポート指定
 var port = 8124;
